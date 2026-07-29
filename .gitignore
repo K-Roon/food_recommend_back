@@ -40,3 +40,5 @@ out/
 serviceAccountKey.json
 .env
 *.pem
+
+*.DS_Store
