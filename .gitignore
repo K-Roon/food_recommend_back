@@ -40,6 +40,7 @@ out/
 serviceAccountKey.json
 .env
 *.pem
+application-local.yml
 
 *.DS_Store
 .DS_Store
