@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: food_recommend_back
+
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}:5432/${DB_NAME}
+    username: app_backend
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 5
+
+  jpa:
+    open-in-view: false   # 필수: 켜두면 커넥션 획득 시점이 불명확해져 RLS 컨텍스트 설정과 꼬일 수 있음
+    hibernate:
+      ddl-auto: none      # 테이블은 이미 SQL(schema.sql)로 직접 만들어뒀으므로 JPA가 건드리지 않게
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8080
+
+firebase:
+  # Firebase 콘솔 > 프로젝트 설정 > 서비스 계정 > 새 비공개 키 생성한 JSON을
+  # base64로 인코딩해서 환경변수로 주입 (파일로 절대 커밋 금지)
+  # 로컬 테스트(맥): cat serviceAccountKey.json | base64 | pbcopy
+  service-account-base64: ${FIREBASE_SERVICE_ACCOUNT_BASE64:}
