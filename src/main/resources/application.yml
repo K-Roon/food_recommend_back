@@ -1,10 +1,14 @@
 spring:
   application:
     name: food_recommend_back
-  profiles:
-    active: local
+#  profiles:
+#    active:
+#      local
 
   datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     hikari:
       maximum-pool-size: 5
 
@@ -16,6 +20,9 @@ spring:
       hibernate:
         format_sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+firebase:
+  service-account-base64: ${FIREBASE_SERVICE_ACCOUNT_BASE64}
 
 server:
   port: 8080

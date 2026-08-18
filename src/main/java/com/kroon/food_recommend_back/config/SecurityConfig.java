@@ -29,8 +29,8 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable()) // stateless REST API라 CSRF 토큰 불필요
             .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/actuator/health").permitAll()
-                .anyRequest().authenticated()
+                    .requestMatchers("/actuator/health", "/api/signup").permitAll()
+                    .anyRequest().authenticated()
             )
             .addFilterBefore(firebaseAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

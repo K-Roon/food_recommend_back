@@ -32,14 +32,15 @@ public class RlsContextService {
 
     @Transactional
     public User bootstrap(String uid) {
-        jdbcTemplate.update("select set_app_context(?, null, null)", uid);
+        jdbcTemplate.queryForObject("select set_app_context(?, null, null)", Object.class, uid);
 
         User user = userRepository.findById(uid)
                 .orElseThrow(() -> new IllegalStateException(
                         "users 테이블에 해당 uid row가 없습니다 (아직 가입 절차가 끝나지 않았을 수 있음): " + uid));
 
-        jdbcTemplate.update(
+        jdbcTemplate.queryForObject(
                 "select set_app_context(?, ?::uuid, ?)",
+                Object.class,
                 uid,
                 user.getCompanyId() != null ? user.getCompanyId().toString() : null,
                 user.getRole() != null ? user.getRole().name() : null
