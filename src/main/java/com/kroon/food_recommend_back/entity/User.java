@@ -42,5 +42,10 @@ public class User {
     private Instant createdAt;
 
     public enum Role { admin, company_admin, general_user }
-    public enum Status { active, suspended, banned, deleted }
+    /**
+     * DB의 user_status enum과 값이 정확히 같아야 합니다 (하나라도 빠지면 그 상태의 유저를 읽는 순간 예외).
+     * - deleted  : 회사관리자가 회사에서 제명 (CompanyAdminService.removeFromCompany)
+     * - withdrawn: 본인이 직접 탈퇴 (탈퇴 API는 아직 없음)
+     */
+    public enum Status { active, suspended, banned, deleted, withdrawn }
 }

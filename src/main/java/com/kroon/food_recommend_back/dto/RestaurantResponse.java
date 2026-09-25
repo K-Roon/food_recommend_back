@@ -17,8 +17,13 @@ public class RestaurantResponse {
     private final BigDecimal longitude;
     private final UUID companyId;
     private final Instant createdAt;
+    private final Instant updatedAt;
+    /** 내가 등록한 레스토랑인지 */
+    private final boolean mine;
+    /** 수정/삭제 버튼을 보여줄지 (본인 또는 회사관리자/관리자) */
+    private final boolean editable;
 
-    public RestaurantResponse(Restaurant restaurant) {
+    public RestaurantResponse(Restaurant restaurant, boolean mine, boolean editable) {
         this.id = restaurant.getId();
         this.name = restaurant.getName();
         this.address = restaurant.getAddress();
@@ -26,5 +31,8 @@ public class RestaurantResponse {
         this.longitude = restaurant.getLongitude();
         this.companyId = restaurant.getCompanyId();
         this.createdAt = restaurant.getCreatedAt();
+        this.updatedAt = restaurant.getUpdatedAt();
+        this.mine = mine;
+        this.editable = editable;
     }
 }

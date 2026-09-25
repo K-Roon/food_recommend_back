@@ -26,3 +26,13 @@ firebase:
 
 server:
   port: 8080
+
+# Supabase 무료 티어 휴면 방지 — 전부 기본값이라 이 블록이 없어도 동작합니다.
+# Cloud Run에서 뜨면 서버가 스스로 Cloud Scheduler 잡을 만들어서 3일마다
+# /api/health/db-ping 을 호출하게 합니다 (CloudSchedulerKeepAliveRegistrar 참고).
+app:
+  keepalive:
+    enabled: true
+    job-name: db-keepalive
+    schedule: "0 9 */3 * *"
+    time-zone: Asia/Seoul
